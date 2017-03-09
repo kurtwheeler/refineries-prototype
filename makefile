@@ -7,8 +7,11 @@ run:
 stop:
 	docker rm test-worker -f
 
+master:
+	docker build -t master-test .
+
 test:
-	python master.py
+	docker run --name master-test --link some-rabbit:rabbit master-test
 
 rabbit:
 	docker run -d --hostname my-rabbit --name some-rabbit rabbitmq:3
