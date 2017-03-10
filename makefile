@@ -7,8 +7,8 @@ run:
 stop:
 	docker rm test-worker -f
 
-master:
-	docker build -t master-test .
+clean:
+	docker rm master-test -f
 
 test:
 	docker run --name master-test --link some-rabbit:rabbit master-test

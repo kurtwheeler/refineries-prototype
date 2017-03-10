@@ -7,7 +7,11 @@ WORKDIR /home/user
 
 ENV CELERY_VERSION 4.0.2
 
-RUN pip install celery=="$CELERY_VERSION"
+COPY requirements.in .
+
+RUN pip install pip-tools && \
+    pip-compile requirements.in && \
+    pip install -r requirements.txt
 
 RUN { \
 	echo 'import os'; \
